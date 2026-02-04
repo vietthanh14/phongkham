@@ -1,0 +1,5 @@
+.gemini/
+tmp/
+.vscode/
+.idea/
+*.log
