@@ -60,3 +60,10 @@ export interface Service {
     status: 'Pending' | 'Completed' | 'Skipped';
     created_at: string;
 }
+
+export interface Prescription {
+    id: string;
+    visit_id: string;
+    medication_data: any;
+    created_at: string;
+}

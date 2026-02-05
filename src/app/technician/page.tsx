@@ -138,32 +138,52 @@ export default function TechnicianPage() {
         }).eq('id', editingService.id);
 
         if (!error) {
-            // 3. Check if all services for this visit are completed?
-            // Refetch is safest to ensure DB consistency, but we know we just updated one.
-            // Let's manually check against the current list + our update
-
-            const updatedServices = visitServices.map(s =>
-                s.id === editingService.id ? { ...s, status: 'Completed' } : s
-            );
-            setVisitServices(updatedServices as Service[]); // Update local UI immediately
-
-            // Check if ANY service is still Pending
-            const hasPending = updatedServices.some(s => s.status === 'Pending');
-
-            if (!hasPending) {
-                await supabase.from('visits').update({ status: 'Return to Doctor' }).eq('id', activeVisit.id);
-                setMessage({ type: 'success', text: 'Đã hoàn tất TOÀN BỘ dịch vụ. Bệnh nhân đã chuyển về bác sĩ.' });
-                setActiveVisit(null);
-                setEditingService(null);
-            } else {
-                setMessage({ type: 'success', text: `Đã lưu kết quả ${editingService.service_type}. Còn dịch vụ chưa làm.` });
-                setEditingService(null); // Đóng form để chọn cái khác
-            }
-
+            checkAndCompleteVisit('Completed');
         } else {
             setMessage({ type: 'error', text: 'Lỗi khi lưu kết quả.' });
         }
         setLoading(false);
+    }
+
+    async function handleSkipService() {
+        if (!activeVisit || !editingService || !selectedTech) return;
+        if (!confirm(`Xác nhận bỏ qua dịch vụ ${editingService.service_type}?`)) return;
+
+        setLoading(true);
+        const { error } = await supabase.from('services').update({
+            status: 'Skipped',
+            tech_by: selectedTech,
+            result_text: 'Đã bỏ qua / Không thực hiện'
+        }).eq('id', editingService.id);
+
+        if (!error) {
+            checkAndCompleteVisit('Skipped');
+        } else {
+            setMessage({ type: 'error', text: 'Lỗi khi bỏ qua dịch vụ.' });
+        }
+        setLoading(false);
+    }
+
+    async function checkAndCompleteVisit(lastAction: 'Completed' | 'Skipped') {
+        if (!activeVisit || !editingService) return;
+
+        const updatedServices = visitServices.map(s =>
+            s.id === editingService.id ? { ...s, status: lastAction } : s
+        );
+        setVisitServices(updatedServices as Service[]);
+
+        // Check if ANY service is still Pending
+        const hasPending = updatedServices.some(s => s.status === 'Pending');
+
+        if (!hasPending) {
+            await supabase.from('visits').update({ status: 'Return to Doctor' }).eq('id', activeVisit.id);
+            setMessage({ type: 'success', text: 'Đã xử lý xong hết các dịch vụ. Bệnh nhân chuyển về bác sĩ.' });
+            setActiveVisit(null);
+            setEditingService(null);
+        } else {
+            setMessage({ type: 'success', text: `Đã cập nhật trạng thái: ${lastAction === 'Completed' ? 'Hoàn thành' : 'Bỏ qua'}.` });
+            setEditingService(null);
+        }
     }
 
     // Auto-dismiss message after 3 seconds
@@ -315,6 +335,13 @@ export default function TechnicianPage() {
                                             </div>
 
                                             <div className="pt-4 flex justify-end gap-3">
+                                                <button
+                                                    onClick={handleSkipService}
+                                                    disabled={loading || !selectedTech}
+                                                    className="bg-gray-100 text-red-600 px-4 py-2 rounded-lg hover:bg-red-50 border border-gray-200 transition-all flex items-center gap-2 disabled:opacity-50"
+                                                >
+                                                    <XCircle size={18} /> Bỏ qua
+                                                </button>
                                                 <button
                                                     onClick={handleSaveResult}
                                                     disabled={loading || !selectedTech}

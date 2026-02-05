@@ -92,6 +92,17 @@ export default function ReceptionPage() {
                     .single();
                 if (error) throw error;
                 patientId = data.id;
+            } else if (patientId) {
+                // Check if patient already has an active visit
+                const { data: activeVisits } = await supabase
+                    .from('visits')
+                    .select('id, status')
+                    .eq('patient_id', patientId)
+                    .in('status', ['Waiting for Exam', 'Examing', 'Waiting for Service', 'Return to Doctor', 'Ready for Payment']);
+
+                if (activeVisits && activeVisits.length > 0) {
+                    throw new Error(`Bệnh nhân này đang có lượt khám (Trạng thái: ${activeVisits[0].status}). Vui lòng kiểm tra lại.`);
+                }
             }
 
             // 2. Create Visit
