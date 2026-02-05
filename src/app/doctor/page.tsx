@@ -300,6 +300,7 @@ export default function DoctorPage() {
                                 title="Đang khám (Của tôi)"
                                 onSelect={handleSelectPatient}
                                 filterDoctor={selectedDoctor} // We need to add this prop to QueueList
+                                className="h-auto shadow-none border-none !bg-transparent"
                             />
                         )}
 
@@ -308,6 +309,7 @@ export default function DoctorPage() {
                                 status="Waiting for Exam"
                                 title="Khám mới"
                                 onSelect={handleSelectPatient}
+                                className="h-auto shadow-none border-none !bg-transparent"
                             />
                         </div>
                         <div className="mt-4">
@@ -315,6 +317,7 @@ export default function DoctorPage() {
                                 status="Return to Doctor"
                                 title="Quay lại (Có KQ)"
                                 onSelect={handleSelectPatient}
+                                className="h-auto shadow-none border-none !bg-transparent"
                             />
                         </div>
                     </div>
@@ -329,6 +332,7 @@ export default function DoctorPage() {
                                     title="Chờ t.toán (Vừa xong)"
                                     onSelect={handleSelectPatient}
                                     filterDoctor={selectedDoctor}
+                                    className="h-full shadow-none border-none !bg-transparent" // Keep h-full here as it is only child
                                 />
                             ) : (
                                 <p className="text-xs text-gray-400 text-center italic mt-4">Chọn bác sĩ để xem lịch sử</p>
