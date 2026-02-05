@@ -1,9 +1,10 @@
 {
+  "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/admin/page": "app/admin/page.js",
   "/doctor/page": "app/doctor/page.js",
+  "/page": "app/page.js",
   "/print/prescription/[id]/page": "app/print/prescription/[id]/page.js",
   "/reception/page": "app/reception/page.js",
-  "/technician/page": "app/technician/page.js",
-  "/page": "app/page.js"
+  "/technician/page": "app/technician/page.js"
 }

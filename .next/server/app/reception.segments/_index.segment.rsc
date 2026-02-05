@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[39756,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
+3:I[58298,["/_next/static/chunks/29932619cfae91bf.js"],"default"]
+4:I[37457,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
+5:I[22016,["/_next/static/chunks/7c92e96509cd355e.js"],""]
+:HL["/_next/static/chunks/63be667208bbadc1.css","style"]
+0:{"buildId":"gXa6Xqh4Vn4Udt5wE5z5K","rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/63be667208bbadc1.css","precedence":"next"}]],["$","html",null,{"lang":"vi","suppressHydrationWarning":true,"children":["$","body",null,{"suppressHydrationWarning":true,"children":["$","$L2",null,{"parallelRouterKey":"children","error":"$3","errorStyles":[],"errorScripts":[["$","script","script-0",{"src":"/_next/static/chunks/29932619cfae91bf.js","async":true}]],"template":["$","$L4",null,{}],"notFound":[["$","div",null,{"className":"flex flex-col items-center justify-center min-h-screen bg-gray-50","children":[["$","h2",null,{"className":"text-4xl font-bold text-primary mb-4","children":"404 - Không tìm thấy trang"}],["$","p",null,{"className":"text-gray-600 mb-8","children":"Xin lỗi, trang bạn tìm kiếm không tồn tại."}],["$","$L5",null,{"href":"/","className":"px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-600 transition-colors","children":"Quay về Trang chủ"}]]}],[]]}]}]}]]}],"loading":null,"isPartial":false}
