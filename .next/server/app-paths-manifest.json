@@ -1,0 +1,8 @@
+{
+  "/reception/page": "app/reception/page.js",
+  "/doctor/page": "app/doctor/page.js",
+  "/page": "app/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/technician/page": "app/technician/page.js",
+  "/print/prescription/[id]/page": "app/print/prescription/[id]/page.js"
+}

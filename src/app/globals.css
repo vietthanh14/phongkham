@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F8F9FA;
+  --foreground: #212529;
+  --primary: #007BFF;
+  --secondary: #A8D5BA;
+  --success: #28A745;
+  --warning: #FFC107;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
